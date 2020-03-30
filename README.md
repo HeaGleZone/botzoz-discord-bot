@@ -2,4 +2,4 @@
 First bot developed by me for my discord server - Canadafrica.
 
 ## Already Implemented
-- TODO
+- Shuffle command: move voice users to random channels
