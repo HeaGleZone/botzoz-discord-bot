@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix='$')
 TOKEN = get_token(enableLog=True)
 
 # Extensions
-extensions = ['cogs.messages_handler']
+extensions = ['cogs.messages_handler', 'cogs.commands_handler']
 load_extension(bot, extensions)
 
 # Running Bot
