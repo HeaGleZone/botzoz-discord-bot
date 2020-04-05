@@ -27,6 +27,24 @@ class CommandsHandler(commands.Cog):
             rnd_channel = random.choice(voice_channels)
             await user.move_to(rnd_channel)
 
+    @commands.command()
+    @commands.has_permissions(administrator=True)
+    @commands.guild_only()
+    async def merge(self, ctx):
+        'Merges every voice channel user into the author channel'
+
+        # Props
+        author = ctx.message.author
+        author_channel = author.voice.channel
+        user_guild = author.guild.id
+        voice_users = get_voice_users(self.bot, user_guild)
+
+        # Response
+        print(f'User {author} is merging voice members.')
+        await ctx.send('Merging voice users.')
+        for user in voice_users:
+            await user.move_to(author_channel)
+
     @shuffle.error
     async def general_guild_only_error(self, ctx, error):
         # Props
