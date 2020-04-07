@@ -28,7 +28,7 @@ class CommandsHandler(commands.Cog):
             await user.move_to(rnd_channel)
 
     @commands.command()
-    @commands.has_permissions(administrator=True)
+    @commands.has_permissions(administrator=False)
     @commands.guild_only()
     async def merge(self, ctx):
         'Merges every voice channel user into the author channel'
@@ -45,6 +45,7 @@ class CommandsHandler(commands.Cog):
         for user in voice_users:
             await user.move_to(author_channel)
 
+    @merge.error
     @shuffle.error
     async def general_guild_only_error(self, ctx, error):
         # Props
@@ -53,7 +54,7 @@ class CommandsHandler(commands.Cog):
         # No DMs
         if isinstance(error, commands.NoPrivateMessage):
             print(f'User {author} has no permissions to shuffle voice users.')
-            await ctx.send('Nope')
+            await ctx.send('This command doesn\' work from DMs.')
             return
 
         # Check permission
