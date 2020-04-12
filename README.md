@@ -6,4 +6,4 @@ First bot developed by me for my discord server - Canadafrica.
 - Merge command: merge every voice user inside the author's channel -> `$merge`
 
 ## Functionalities
-- Post memes every once in a while
+- Post memes every hour

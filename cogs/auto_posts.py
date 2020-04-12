@@ -30,7 +30,12 @@ class AutoPosts(commands.Cog):
 
         while not self.bot.is_closed():
             memeUrl = await self.fetch_meme()
-            await memes_channel.send(memeUrl)
+
+            if memeUrl is not None:
+                print('Posting your hourly meme')
+                await memes_channel.send(memeUrl)
+            else:
+                print('Bot couldn\'t fetch a meme!')
 
             # Wait 1 hour
             await asyncio.sleep(60*60)
@@ -43,6 +48,7 @@ class AutoPosts(commands.Cog):
                 if r.status == 200:
                     js = await r.json()
                     return js["data"]["children"][0]["data"]["url"]
+                return None
 
 
 def setup(bot):
