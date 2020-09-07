@@ -2,8 +2,8 @@
 
 from discord.ext import commands
 
-from musicbot_filters import *
-from messages_filters import *
+from musicbot_filters import *  # pylint: disable=wildcard-import
+from messages_filters import *  # pylint: disable=wildcard-import
 
 
 class MessagesHandler(commands.Cog):

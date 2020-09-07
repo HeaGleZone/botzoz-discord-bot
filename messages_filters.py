@@ -5,7 +5,7 @@ def are_mentions_allowed(channel):
     'Checks if the channel allows mentions'
 
     channel = str(channel)
-    return channel == 'spam' or channel == 'spam-menzioni'
+    return channel in ('spam-menzioni', 'spam')
 
 
 def are_embeds_allowed(channel):
