@@ -1,10 +1,13 @@
-import discord
-from discord.ext import commands
+"Handles Bot Commands"
+
 import random
+from discord.ext import commands
 from utilities import get_voice_channels, get_voice_users
 
 
 class CommandsHandler(commands.Cog):
+    "Handles Bot Commands"
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -48,6 +51,8 @@ class CommandsHandler(commands.Cog):
     @merge.error
     @shuffle.error
     async def general_guild_only_error(self, ctx, error):
+        "Guild Only Errors"
+
         # Props
         author = ctx.message.author
 
@@ -65,4 +70,5 @@ class CommandsHandler(commands.Cog):
 
 
 def setup(bot):
+    "Loads Bot Cog"
     bot.add_cog(CommandsHandler(bot))

@@ -1,10 +1,14 @@
+"Automatic Posts - with timers"
+
+import asyncio
 import discord
 from discord.ext import commands
-import asyncio
 import aiohttp
 
 
 class AutoPosts(commands.Cog):
+    "Automatic Posts - with timers"
+
     def __init__(self, bot):
         self.bot = bot
         self.bg_task = self.bot.loop.create_task(self.post_meme())
@@ -29,11 +33,11 @@ class AutoPosts(commands.Cog):
             memes_channel = await guild.create_text_channel('memes')
 
         while not self.bot.is_closed():
-            memeUrl = await self.fetch_meme()
+            meme_url = await self.fetch_meme()
 
-            if memeUrl is not None:
+            if meme_url is not None:
                 print('Posting your hourly meme')
-                await memes_channel.send(memeUrl)
+                await memes_channel.send(meme_url)
             else:
                 print('Bot couldn\'t fetch a meme!')
 
@@ -52,4 +56,5 @@ class AutoPosts(commands.Cog):
 
 
 def setup(bot):
+    "Loads Bot Cog"
     bot.add_cog(AutoPosts(bot))

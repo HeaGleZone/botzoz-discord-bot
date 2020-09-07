@@ -1,32 +1,37 @@
+"Handls Bot API Tokens"
+
 import os
 
 
-def debug_env(isProduction):
-    if (isProduction):
+def debug_env(is_production):
+    "Logs Current Environment"
+
+    if is_production:
         print('Production Environment')
     else:
         print('Development Environment')
 
 
-def get_token(enableLog):
+def get_token(enable_log):
     'Gets token based on the current environment'
 
     # Setting up Production or Dev Env
-    isProd = os.environ.get('IS_PRODUCTION', None)
-    TOKEN = os.environ.get('TOKEN', None)
+    is_prod = os.environ.get('IS_PRODUCTION', None)
+    token = os.environ.get('TOKEN', None)
 
     # Get Token
-    if not(isProd):
+    if not is_prod:
         # Libs
-        from os.path import join, dirname
-        from dotenv import load_dotenv
+        from os.path import join, dirname  # pylint: disable=import-outside-toplevel
+        from dotenv import load_dotenv  # pylint: disable=import-outside-toplevel
 
         # Local Env
         dotenv_path = join(dirname(__file__), '.env')
         load_dotenv(dotenv_path)
-        TOKEN = os.getenv('TOKEN')
+        token = os.getenv('TOKEN')
 
     # Log
-    debug_env(isProd)
+    if enable_log:
+        debug_env(is_prod)
 
-    return TOKEN
+    return token

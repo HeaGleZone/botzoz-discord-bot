@@ -1,3 +1,5 @@
+"Handles text-channels messages"
+
 from discord.ext import commands
 
 from musicbot_filters import *
@@ -5,24 +7,31 @@ from messages_filters import *
 
 
 class MessagesHandler(commands.Cog):
+    "Handles text-channels messages"
+
     def __init__(self, bot):
         self.bot = bot
 
     @commands.Cog.listener()
     async def on_ready(self):
+        "Bot Ready"
         print('\n---------------------')
         print('     Bot running')
         print('---------------------\n')
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        "Tracks new messages"
+
         # Don't check own messages
-        if (self.bot.user == message.author):
+        if self.bot.user == message.author:
             return
 
         await self.delete_messages(message)
 
     async def delete_messages(self, message):
+        "Delete text-channel message(s)"
+
         # Props
         content = message.content
         channel = message.channel
@@ -32,7 +41,7 @@ class MessagesHandler(commands.Cog):
         mentions = message.mentions
 
         # Delete music bot commands and message if not in the right channel
-        if not(is_music_channel(channel)):
+        if not is_music_channel(channel):
             if is_musicbot_command(content) or author.bot:
                 print('Deleted message - music-bot restrictions')
                 await message.delete()
@@ -54,4 +63,5 @@ class MessagesHandler(commands.Cog):
 
 
 def setup(bot):
+    "Loads Bot Cog"
     bot.add_cog(MessagesHandler(bot))

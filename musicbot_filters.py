@@ -1,4 +1,4 @@
-# Music Bot helper functions
+'Music Bot helper functions'
 
 
 def is_music_channel(channel):
